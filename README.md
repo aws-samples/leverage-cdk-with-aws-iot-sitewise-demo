@@ -137,4 +137,4 @@ This library is licensed under the MIT-0 License. See the LICENSE file.
 ### 
 # Special Thanks
 * Bin Qiu: Partner Solutions Architect 
-* Keith Hodo: Partner Solutions Architect
+* Nick White: Partner Solutions Architect
