@@ -43,7 +43,7 @@ Before you begin, ensure that you have the following prerequisites:
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/aws-samples/aws-iot-sitewise-cdk-demo.git
+git clone https://github.com/aws-samples/leverage-cdk-with-aws-iot-sitewise-demo.git
 ```
 
 2. Change into the project directory:
