@@ -1,0 +1,484 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "CdkSitewiseDemoStack": {
+        "id": "CdkSitewiseDemoStack",
+        "path": "CdkSitewiseDemoStack",
+        "children": {
+          "GenericMachineModel": {
+            "id": "GenericMachineModel",
+            "path": "CdkSitewiseDemoStack/GenericMachineModel",
+            "children": {
+              "GenericMachineModel": {
+                "id": "GenericMachineModel",
+                "path": "CdkSitewiseDemoStack/GenericMachineModel/GenericMachineModel",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IoTSiteWise::AssetModel",
+                  "aws:cdk:cloudformation:props": {
+                    "assetModelDescription": "Generic Machine Model Description",
+                    "assetModelName": "Generic Machine Model",
+                    "assetModelProperties": [
+                      {
+                        "name": "name",
+                        "dataType": "STRING",
+                        "logicalId": "GenericMachineNameModelAttribute",
+                        "type": {
+                          "typeName": "Attribute",
+                          "attribute": {
+                            "defaultValue": "Generic Machine"
+                          }
+                        }
+                      },
+                      {
+                        "name": "brand_model",
+                        "dataType": "STRING",
+                        "logicalId": "GenericMachineBrand_ModelModelAttribute",
+                        "type": {
+                          "typeName": "Attribute",
+                          "attribute": {
+                            "defaultValue": "Machine brand_model"
+                          }
+                        }
+                      },
+                      {
+                        "name": "Consumption",
+                        "dataType": "DOUBLE",
+                        "logicalId": "MachineConsumptionMeasurement",
+                        "unit": "A",
+                        "type": {
+                          "typeName": "Measurement"
+                        }
+                      },
+                      {
+                        "name": "Motor Temperature Fahrenheit",
+                        "dataType": "DOUBLE",
+                        "logicalId": "MotorTemperatureFahMeasurement",
+                        "unit": "F",
+                        "type": {
+                          "typeName": "Measurement"
+                        }
+                      },
+                      {
+                        "name": "Motor Temperature Celsius",
+                        "dataType": "DOUBLE",
+                        "logicalId": "MotorTemperatureCelMeasurement",
+                        "unit": "C",
+                        "type": {
+                          "typeName": "Transform",
+                          "transform": {
+                            "expression": "(temp - 32) * 5/9",
+                            "variables": [
+                              {
+                                "name": "temp",
+                                "value": {
+                                  "propertyLogicalId": "MotorTemperatureFahMeasurement"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "name": "Average Motor Temperature",
+                        "dataType": "DOUBLE",
+                        "logicalId": "AverageMotorTemperatureMeasurement",
+                        "unit": "F",
+                        "type": {
+                          "typeName": "Metric",
+                          "metric": {
+                            "expression": "avg(temp)",
+                            "variables": [
+                              {
+                                "name": "temp",
+                                "value": {
+                                  "propertyLogicalId": "MotorTemperatureFahMeasurement"
+                                }
+                              }
+                            ],
+                            "window": {
+                              "tumbling": {
+                                "interval": "5m"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iotsitewise.CfnAssetModel",
+                  "version": "2.96.2"
+                }
+              },
+              "Generic Machine Model ID": {
+                "id": "Generic Machine Model ID",
+                "path": "CdkSitewiseDemoStack/GenericMachineModel/Generic Machine Model ID",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.96.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.70"
+            }
+          },
+          "ProductionLineDemoModel": {
+            "id": "ProductionLineDemoModel",
+            "path": "CdkSitewiseDemoStack/ProductionLineDemoModel",
+            "children": {
+              "Generic-ProductionLineModel": {
+                "id": "Generic-ProductionLineModel",
+                "path": "CdkSitewiseDemoStack/ProductionLineDemoModel/Generic-ProductionLineModel",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IoTSiteWise::AssetModel",
+                  "aws:cdk:cloudformation:props": {
+                    "assetModelDescription": "Generic Production Lined Model Description",
+                    "assetModelHierarchies": [
+                      {
+                        "childAssetModelId": {
+                          "Ref": "GenericMachineModel818510EB"
+                        },
+                        "logicalId": "ProductionMachineHierarchy",
+                        "name": "Production Line - Generic Machine Model Hiearchy"
+                      }
+                    ],
+                    "assetModelName": "Generic Production Line Model",
+                    "assetModelProperties": [
+                      {
+                        "name": "name",
+                        "dataType": "STRING",
+                        "logicalId": "GenericProductionLineNameModelAttribute",
+                        "type": {
+                          "typeName": "Attribute",
+                          "attribute": {
+                            "defaultValue": "Production Line"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iotsitewise.CfnAssetModel",
+                  "version": "2.96.2"
+                }
+              },
+              "Generic Production Line Model ID": {
+                "id": "Generic Production Line Model ID",
+                "path": "CdkSitewiseDemoStack/ProductionLineDemoModel/Generic Production Line Model ID",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.96.2"
+                }
+              },
+              "Production-Machine Hierarchy Logical Id": {
+                "id": "Production-Machine Hierarchy Logical Id",
+                "path": "CdkSitewiseDemoStack/ProductionLineDemoModel/Production-Machine Hierarchy Logical Id",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.96.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.70"
+            }
+          },
+          "FactoryModel": {
+            "id": "FactoryModel",
+            "path": "CdkSitewiseDemoStack/FactoryModel",
+            "children": {
+              "FactoryModel": {
+                "id": "FactoryModel",
+                "path": "CdkSitewiseDemoStack/FactoryModel/FactoryModel",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IoTSiteWise::AssetModel",
+                  "aws:cdk:cloudformation:props": {
+                    "assetModelDescription": "Generic Factory Model Description",
+                    "assetModelHierarchies": [
+                      {
+                        "childAssetModelId": {
+                          "Ref": "ProductionLineDemoModelGenericProductionLineModel55FE30DB"
+                        },
+                        "logicalId": "Factory_ProductionLineHierarchy",
+                        "name": "Factory - Production Line Hiearchy"
+                      }
+                    ],
+                    "assetModelName": "Generic Factory Model",
+                    "assetModelProperties": [
+                      {
+                        "name": "name",
+                        "dataType": "STRING",
+                        "logicalId": "FactoryNameModelAttribute",
+                        "type": {
+                          "typeName": "Attribute",
+                          "attribute": {
+                            "defaultValue": "Factory"
+                          }
+                        }
+                      },
+                      {
+                        "name": "region",
+                        "dataType": "STRING",
+                        "logicalId": "FactoryRegionModelAttribute",
+                        "type": {
+                          "typeName": "Attribute",
+                          "attribute": {
+                            "defaultValue": "US-Texas"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iotsitewise.CfnAssetModel",
+                  "version": "2.96.2"
+                }
+              },
+              "Production Line Model Id": {
+                "id": "Production Line Model Id",
+                "path": "CdkSitewiseDemoStack/FactoryModel/Production Line Model Id",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.96.2"
+                }
+              },
+              "Factory-Production Hierarchy Logical Id": {
+                "id": "Factory-Production Hierarchy Logical Id",
+                "path": "CdkSitewiseDemoStack/FactoryModel/Factory-Production Hierarchy Logical Id",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.96.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.70"
+            }
+          },
+          "MachineAsset_1": {
+            "id": "MachineAsset_1",
+            "path": "CdkSitewiseDemoStack/MachineAsset_1",
+            "children": {
+              "MachineAsset": {
+                "id": "MachineAsset",
+                "path": "CdkSitewiseDemoStack/MachineAsset_1/MachineAsset",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IoTSiteWise::Asset",
+                  "aws:cdk:cloudformation:props": {
+                    "assetModelId": {
+                      "Ref": "GenericMachineModel818510EB"
+                    },
+                    "assetName": "Machine-1",
+                    "assetProperties": [
+                      {
+                        "logicalId": "MachineConsumptionMeasurement",
+                        "alias": "machines/Machine-1/consumption",
+                        "notificationState": "ENABLED"
+                      },
+                      {
+                        "logicalId": "MotorTemperatureFahMeasurement",
+                        "alias": "machines/Machine-1/temperature",
+                        "notificationState": "ENABLED"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iotsitewise.CfnAsset",
+                  "version": "2.96.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.70"
+            }
+          },
+          "MachineAsset_2": {
+            "id": "MachineAsset_2",
+            "path": "CdkSitewiseDemoStack/MachineAsset_2",
+            "children": {
+              "MachineAsset": {
+                "id": "MachineAsset",
+                "path": "CdkSitewiseDemoStack/MachineAsset_2/MachineAsset",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IoTSiteWise::Asset",
+                  "aws:cdk:cloudformation:props": {
+                    "assetModelId": {
+                      "Ref": "GenericMachineModel818510EB"
+                    },
+                    "assetName": "Machine-2",
+                    "assetProperties": [
+                      {
+                        "logicalId": "MachineConsumptionMeasurement",
+                        "alias": "machines/Machine-2/consumption",
+                        "notificationState": "ENABLED"
+                      },
+                      {
+                        "logicalId": "MotorTemperatureFahMeasurement",
+                        "alias": "machines/Machine-2/temperature",
+                        "notificationState": "ENABLED"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iotsitewise.CfnAsset",
+                  "version": "2.96.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.70"
+            }
+          },
+          "ProductionLineAsset_1": {
+            "id": "ProductionLineAsset_1",
+            "path": "CdkSitewiseDemoStack/ProductionLineAsset_1",
+            "children": {
+              "ProductionLineAsset": {
+                "id": "ProductionLineAsset",
+                "path": "CdkSitewiseDemoStack/ProductionLineAsset_1/ProductionLineAsset",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IoTSiteWise::Asset",
+                  "aws:cdk:cloudformation:props": {
+                    "assetHierarchies": [
+                      {
+                        "childAssetId": {
+                          "Ref": "MachineAsset1MachineAsset7E630F88"
+                        },
+                        "logicalId": "ProductionMachineHierarchy"
+                      },
+                      {
+                        "childAssetId": {
+                          "Ref": "MachineAsset2MachineAssetBAC1B5DB"
+                        },
+                        "logicalId": "ProductionMachineHierarchy"
+                      }
+                    ],
+                    "assetModelId": {
+                      "Ref": "ProductionLineDemoModelGenericProductionLineModel55FE30DB"
+                    },
+                    "assetName": "ProductionLine-1"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iotsitewise.CfnAsset",
+                  "version": "2.96.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.70"
+            }
+          },
+          "FactoryAsset_1": {
+            "id": "FactoryAsset_1",
+            "path": "CdkSitewiseDemoStack/FactoryAsset_1",
+            "children": {
+              "FactoryAsset": {
+                "id": "FactoryAsset",
+                "path": "CdkSitewiseDemoStack/FactoryAsset_1/FactoryAsset",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IoTSiteWise::Asset",
+                  "aws:cdk:cloudformation:props": {
+                    "assetHierarchies": [
+                      {
+                        "childAssetId": {
+                          "Ref": "ProductionLineAsset1ProductionLineAsset008C818D"
+                        },
+                        "logicalId": "Factory_ProductionLineHierarchy"
+                      }
+                    ],
+                    "assetModelId": {
+                      "Ref": "FactoryModelA255B0DD"
+                    },
+                    "assetName": "Factory-11"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iotsitewise.CfnAsset",
+                  "version": "2.96.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.70"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "CdkSitewiseDemoStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "CdkSitewiseDemoStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.96.2"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "CdkSitewiseDemoStack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.96.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.70"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "CdkSitewiseDemoStack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.96.2"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "CdkSitewiseDemoStack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.96.2"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.96.2"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.2.70"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.96.2"
+    }
+  }
+}

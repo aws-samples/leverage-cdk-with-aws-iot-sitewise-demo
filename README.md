@@ -48,7 +48,7 @@ git clone https://github.com/aws-samples/leverage-cdk-with-aws-iot-sitewise-demo
 
 2. Change into the project directory:
 ```bash
-cd aws-cdk-factory-sitewise
+cd leverage-cdk-with-aws-iot-sitewise-demo
 ```
 
 3. Install dependencies:
