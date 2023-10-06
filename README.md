@@ -1,7 +1,7 @@
 # Authors
 * **Leo Simberg**: Lead IoT Partner Solutions Architect
 
-# Create Sitewise Models and Assets using CDK
+# Creating Sitewise Models and Assets using CDK
 
 This is an illustrative AWS Cloud Development Kit (CDK) project, showcasing the process of creating Sitewise models and assets for a Factory with a single generic production line and two generic machines using AWS CDK. This project serves as a valuable resource for comprehending the seamless integration of CDK with Sitewise, enabling the construction of comprehensive Sitewise models, assets, and hierarchies through Infrastructure as Code (IaC).
 
